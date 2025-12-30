@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粤剧 · 霓裳大展</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="sound-control" onclick="toggleSound()">
+        <span id="sound-icon">🔇</span>
+        <span id="sound-text">入戏</span>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="spotlight"></div>
+
+    <div class="gallery-viewport" id="viewport">
+        <div class="bg-layer" id="bg-layer">
+            <div class="vertical-poem">
+                <span>南国红豆</span>
+                <span style="margin-top: 40px;">一曲霓裳</span>
+            </div>
+        </div>
+
+        <div class="gallery-track" id="track">
+
+            <div class="item intro">
+    <div class="intro-container">
+        
+        <div class="intro-left">
+            <h1 class="chinese-seal" onclick="startTour()" style="cursor: pointer;">
+                <span class="seal-text">粤韵</span>
+                <span class="seal-box">霓裳</span>
+            </h1>
+            <p class="subtitle">广州粤剧艺术博物馆 · 戏曲服饰文创特展</p>
+        </div>
+
+        <div class="intro-right">
+            <h3>缘起 · 方寸戏台</h3>
+            <p>
+                本展取材自<strong>广州粤剧艺术博物馆</strong>珍贵馆藏。<br>
+                我们甄选“蟒、靠、帔、衣”等<strong>十三类</strong>经典戏服形制，<br>
+                对应扑克牌中 <strong>A 至 K</strong> 的十三级点数，<br>
+                以<strong>新中式水墨</strong>重构视觉语言。<br><br>
+                这不仅是一副扑克牌，更是一座流动的微型博物馆。<br>
+                我们将粤剧的“唱念做打”融入方寸之间，<br>
+                旨在让百年的非遗美学，在年轻一代的指尖<br>
+                <strong>流动、传承、新生</strong>。
+            </p>
+            <div class="scroll-hint">
+                <span>SCROLL TO EXPLORE</span>
+                <span class="arrow">→</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+            <div class="item card-item" data-video-id="CsykvDyKyzg">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card1.jpg" class="art-img" alt="K-男蟒">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>K</h2>
+                        <p>男蟒 / Python Ceremonial Robe</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item" data-video-id="CsykvDyKyzg">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card2.jpg" class="art-img" alt="Q-女蟒">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>Q</h2>
+                        <p>女蟒 / Python Ceremonial Robe</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item" data-video-id="EueZ1mA9y4M">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card3.jpg" class="art-img" alt="J-女大靠">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>J</h2>
+                        <p>女大靠 / Grand Armour (Female)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item" data-video-id="F08mN_GUDtI">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card4.jpg" class="art-img" alt="A-男大靠">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>A</h2>
+                        <p>男大靠 / Grand Armour (Male)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card5.jpg" class="art-img" alt="10-宫装">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>10</h2>
+                        <p>宫装 / Palace Attire</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card6.jpg" class="art-img" alt="9-海青">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>9</h2>
+                        <p>海青 / Sloping Collar Gown</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card7.jpg" class="art-img" alt="8-开氅">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>8</h2>
+                        <p>开氅 / Cloak</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card8.jpg" class="art-img" alt="7-帔风">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>7</h2>
+                        <p>帔风 / Vertical Collar Gown</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card9.jpg" class="art-img" alt="6-衣男">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>6</h2>
+                        <p>衣 (男) / Coat</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card10.jpg" class="art-img" alt="5-衣女">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>5</h2>
+                        <p>衣 (女) / Coat</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card11.jpg" class="art-img" alt="4-官衣">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>4</h2>
+                        <p>官衣 / Official Robe</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card12.jpg" class="art-img" alt="3-座马">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>3</h2>
+                        <p>座马 / Horse Stance</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item card-item">
+                <div class="item-content">
+                    <div class="card-3d-scene">
+                        <div class="card-flipper">
+                            <div class="card-face card-front">
+                                <img src="card13.jpg" class="art-img" alt="2-车装">
+                                <div class="card-shine"></div>
+                            </div>
+                            <div class="card-face card-back">
+                                <img src="back.jpg" class="art-img" alt="back">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <h2>2</h2>
+                        <p>车装 / Che Zhuang</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-inner" id="progress"></div>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+
+            <div class="modal-media-box">
+                <img src="" id="modal-img" alt="Detail">
+            
+                <div id="modal-video-container" style="display:none;">
+                    <video id="modal-video" width="100%" height="100%" controls style="object-fit: contain;">
+                        <source src="" type="video/mp4">
+                    </video>
+                </div>
+            
+                <div id="play-btn-overlay" onclick="playVideo()">
+                    <div class="play-icon">▶</div>
+                    <p>观看表演片段</p>
+                </div>
+            </div>
+
+            <div class="modal-text-box">
+                <h2 id="modal-title">标题</h2>
+                <h3 id="modal-subtitle">副标题</h3>
+                <div class="modal-desc">
+                    <p>粤剧戏服，又称“行头”，是粤剧艺术的重要组成部分...</p>
+                    <p>（点击左侧播放按钮，可观看该行头在经典剧目中的实际演出效果）</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="vertical-scroll-overlay">
+    <div class="ink-container" id="ink-container">
+        <div class="ink-blob"></div>
+    </div>
+
+    <div class="smoke-layer">
+        <div class="smoke s1"></div>
+        <div class="smoke s2"></div>
+        <div class="smoke s3"></div>
+    </div>
+
+    <div class="scroll-content" id="scroll-content">
+    </div>
+
+    <div class="scroll-footer" onclick="closeVerticalScroll(true)">
+        <div class="restart-btn">重以此身入戏</div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

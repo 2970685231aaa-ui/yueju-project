@@ -1,0 +1,668 @@
+/* style.css - V3.2 终极修正版 (修复卡片凌乱、文字重叠、颜色丢失) */
+
+/* 1. 基础设置 & 鎏金红绸背景 */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Songti SC", "Noto Serif SC", serif;
+    background-color: #2b0a0a;
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(255, 50, 50, 0.05) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 3px),
+        repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 3px),
+        radial-gradient(circle at 50% 50%, transparent 40%, #000000 100%);
+}
+
+/* 2. 追光灯 */
+#spotlight {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80vh;
+    height: 80vh;
+    background: radial-gradient(circle, rgba(255, 80, 60, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    mix-blend-mode: screen;
+}
+
+/* 3. 序言页 (Intro) - 颜色强制修复 */
+/* style.css - 修复首页宽度被覆盖的问题 */
+
+/* 🚀 修改选择器为 .item.intro，增加权重，确保覆盖掉 .item 的设置 */
+.item.intro {
+    width: 100vw !important;
+    /* 强制全屏宽度 */
+    padding: 0 !important;
+    /* 清除 .item 的 padding */
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    /* 防止挤压 */
+    z-index: 10;
+}
+
+.intro-container {
+    display: flex;
+    align-items: center;
+    max-width: 1250px;
+    gap: 40px;
+    color: #d4c4a8;
+}
+
+.intro-container.exit-active {
+    opacity: 0;
+    transform: scale(1.1);
+    filter: blur(10px);
+}
+
+.intro-left {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid rgba(212, 196, 168, 0.3);
+    padding-right: 40px;
+    position: relative;
+    z-index: 20;
+}
+
+/* 🔴 红章修复 */
+.chinese-seal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.seal-text {
+    font-size: 5rem;
+    color: #d4c4a8 !important;
+    letter-spacing: 10px;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.seal-box {
+    font-size: 2rem;
+    color: #2b0a0a !important;
+    background-color: #c93737 !important;
+    padding: 15px 10px;
+    border-radius: 4px;
+    writing-mode: vertical-rl;
+    box-shadow: 0 0 20px rgba(201, 55, 55, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.intro-right {
+    flex: 1;
+    padding-left: 40px;
+    color: #d4c4a8 !important;
+}
+
+.intro-right h3 {
+    color: #c93737 !important;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.intro-right p {
+    line-height: 2.2;
+    font-size: 1.1rem;
+    color: #d4c4a8 !important;
+}
+
+.intro-right strong {
+    color: #fff;
+    font-weight: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 滚动提示 */
+.scroll-hint {
+    font-size: 0.8rem;
+    color: #666;
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.arrow {
+    animation: moveRight 1.5s infinite;
+}
+
+@keyframes moveRight {
+    50% {
+        transform: translateX(10px);
+    }
+}
+
+/* 4. 横向滚动轨道与卡片 */
+.gallery-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.gallery-track {
+    display: flex;
+    height: 100%;
+    width: max-content;
+    will-change: transform;
+}
+
+/* 🔧 修复卡片乱的关键：flex-shrink: 0 */
+.item {
+    width: 60vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0 2vw;
+    z-index: 1;
+
+    /* 🚀 关键代码：禁止浏览器挤压卡片，确保它们保持原有宽度！ */
+    flex-shrink: 0;
+}
+
+.item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    /* 确保内容不会跑偏 */
+    width: 100%;
+}
+
+.card-3d-scene {
+    height: 60vh;
+    perspective: 1500px;
+}
+
+.card-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-face .art-img {
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    filter: brightness(0.6) sepia(0.5);
+}
+
+/* 交互翻转 */
+.card-item.is-flipped .card-flipper {
+    transform: rotateY(0deg);
+}
+
+.card-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%);
+    mix-blend-mode: overlay;
+}
+
+.card-item:hover .card-shine {
+    opacity: 1;
+}
+
+/* 🔧 修复文字重叠乱象 */
+.meta {
+    margin-top: 20px;
+    text-align: center;
+    color: #d4c4a8 !important;
+    opacity: 0;
+    /* 默认隐藏文字，防止重叠 */
+    transition: opacity 0.3s ease;
+    transform: translateY(10px);
+}
+
+/* 只有翻转过来的（中间的）卡片才显示文字，且上浮出现 */
+.card-item.is-flipped .meta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.meta h2 {
+    border-bottom: 1px solid #c93737;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* 5. 详情弹窗 */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 30000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    width: 80vw;
+    height: 80vh;
+    background: #2b0a0a;
+    border: 1px solid #d4c4a8;
+    display: flex;
+    transform: translateY(50px);
+    transition: 0.5s;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #d4c4a8;
+    border: 1px solid #d4c4a8;
+    background: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal-media-box {
+    flex: 1;
+    background: #000;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-img-box img {
+    height: 90%;
+    object-fit: contain;
+}
+
+.modal-text-box {
+    flex: 1;
+    padding: 60px;
+    color: #d4c4a8;
+    overflow-y: auto;
+}
+
+.modal-text-box h2 {
+    color: #c93737;
+    border-bottom: 2px solid #3a1a1a;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#play-btn-overlay {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 1px solid rgba(212, 196, 168, 0.3);
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+#play-btn-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#play-btn-overlay:hover {
+    background: #c93737;
+    transform: scale(1.05);
+}
+
+/* 背景诗句 */
+.bg-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.vertical-poem {
+    position: absolute;
+    top: 10vh;
+    right: 10vw;
+    display: flex;
+    gap: 20px;
+    opacity: 0.6;
+}
+
+.vertical-poem span {
+    writing-mode: vertical-rl;
+    font-size: 3rem;
+    color: #d4c4a8;
+    letter-spacing: 15px;
+}
+
+.progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+.progress-inner {
+    height: 100%;
+    width: 0%;
+    background: #c93737;
+    transition: width 0.1s linear;
+}
+
+.sound-control {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 10000;
+    color: #d4c4a8;
+    border: 1px solid #d4c4a8;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    gap: 10px;
+    display: flex;
+}
+
+/* =========================================
+   📜 V3.1 竖向长卷汇总页
+   ========================================= */
+/* style.css - 找到并替换这一整块 */
+
+#vertical-scroll-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow-y: auto;
+    overflow-x: hidden;
+    pointer-events: none;
+    opacity: 0;
+
+    /* 水彩流动背景 (保持不变) */
+    background-color: #1a0505;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E"),
+        radial-gradient(circle at 20% 20%, rgba(138, 28, 28, 0.6) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(14, 30, 74, 0.5) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(200, 100, 50, 0.1) 0%, transparent 100%);
+    background-size: 100% 100%, 150% 150%, 150% 150%, 100% 100%;
+    animation: watercolorMove 20s infinite alternate ease-in-out;
+
+    /* 🚀 核心修改：把圆心从中间(50% 50%)移到右侧边缘(95% 50%) */
+    clip-path: circle(0% at 95% 50%);
+
+    /* 关闭动画逻辑 (保持不变) */
+    transition: clip-path 2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s 1.5s;
+}
+
+#vertical-scroll-overlay.active {
+    pointer-events: all;
+    opacity: 1;
+
+    /* 🚀 核心修改：从右侧边缘向左扩散覆盖全屏 */
+    clip-path: circle(150% at 95% 50%);
+
+    /* 打开动画逻辑 (保持不变) */
+    transition: clip-path 2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s;
+}
+/* 背景流动动画 */
+@keyframes watercolorMove {
+    0% {
+        background-position: 0 0, 0% 0%, 100% 100%, 50% 50%;
+    }
+
+    100% {
+        background-position: 0 0, 10% 10%, 90% 90%, 50% 50%;
+    }
+}
+
+/* style.css - 找到 .ink-blob 并完全替换 */
+
+/* 水墨容器 (保持不变，但为了保险起见建议检查) */
+.ink-container {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    /* 液态融合滤镜：让颜色边缘粘连 */
+    filter: blur(20px) contrast(30);
+    opacity: 0;
+    transition: 0.5s;
+    mix-blend-mode: multiply;
+    /* 🎨 正片叠底：让颜色像墨水一样渗入底色 */
+}
+
+/* 🎨 修改 2：朱砂墨滴 */
+.ink-blob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+
+    /* 改成深红渐变，不再是纯黑 */
+    background: radial-gradient(circle, #8a1c1c 0%, #4a0e0e 100%);
+
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    /* 动画保持 2.5s 慢速扩散 */
+    transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.ink-container.active {
+    opacity: 1;
+}
+
+.ink-container.active .ink-blob {
+    transform: translate(-50%, -50%) scale(50);
+}
+
+/* 汇总网格 - 核心修复：z-index 高于水墨 */
+.scroll-content {
+    position: relative;
+    z-index: 20000;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px 40px;
+    padding: 120px 10%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.scroll-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: 1s ease;
+}
+
+.scroll-item.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-item:nth-child(even) {
+    margin-top: 80px;
+}
+
+.scroll-img {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 2/3;
+    border-radius: 6px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: 0.5s;
+    object-fit: cover;
+}
+
+.scroll-img:hover {
+    transform: scale(1.05) translateY(-10px);
+    border-color: #c93737;
+}
+
+.scroll-text {
+    font-size: 1.5rem;
+    color: #d4c4a8 !important;
+    letter-spacing: 5px;
+    /* 加强阴影，防止在彩色背景上看不清 */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.smoke-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.smoke {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+    filter: blur(40px);
+    animation: floatUp 12s infinite linear;
+    bottom: -200px;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* style.css - 找到并替换 .scroll-footer 和 .restart-btn 部分 */
+
+.scroll-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 120px 0;
+    /* 增加底部留白，防止贴底 */
+    position: relative;
+    z-index: 30000;
+    /* 🚀 核心修复：层级提到最高，确保绝对能点击！ */
+}
+
+.restart-btn {
+    /* 🎨 视觉升级：朱红丹砂风格 */
+    background: linear-gradient(135deg, #c93737 0%, #a61b1b 100%);
+    border: 1px solid rgba(255, 238, 191, 0.6);
+    /* 金色边框 */
+    color: #ffeebf;
+    /* 金色文字 */
+
+    font-size: 1.3rem;
+    /* 字号加大 */
+    padding: 18px 60px;
+    /* 按钮变大 */
+    border-radius: 50px;
+    cursor: pointer;
+
+    /* 增加阴影和发光感 */
+    box-shadow: 0 10px 30px rgba(166, 27, 27, 0.5);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    letter-spacing: 4px;
+    font-family: "Songti SC", serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 悬停特效 */
+.restart-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    /* 上浮 */
+    background: linear-gradient(135deg, #e64545 0%, #c93737 100%);
+    color: #fff;
+    box-shadow: 0 20px 50px rgba(230, 69, 69, 0.6);
+    /* 强烈发光 */
+    border-color: #fff;
+}
+
+/* 点击反馈 */
+.restart-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .intro-container {
+        flex-direction: column;
+    }
+
+    .item {
+        width: 90vw;
+    }
+
+    .scroll-content {
+        grid-template-columns: 1fr;
+    }
+
+    .scroll-item:nth-child(even) {
+        margin-top: 0;
+    }
+}
