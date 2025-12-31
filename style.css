@@ -313,9 +313,19 @@ body {
     align-items: center;
 }
 
-.modal-img-box img {
+/* style.css - 找到原先那段替换成这个 */
+
+/* 修复图片过大撑爆布局的问题 */
+.modal-media-box img,
+#modal-img {
     height: 90%;
+    /* 高度最多占 90% */
+    width: auto;
+    /* 宽度自动 */
+    max-width: 100%;
+    /* 关键：宽度绝不能超过父容器 */
     object-fit: contain;
+    /* 保持比例 */
 }
 
 .modal-text-box {
